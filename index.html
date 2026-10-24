@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1b2d" />
+  <title>Pass Port! - Airport Talk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <section class="screen active" id="startScreen" aria-labelledby="appTitle">
+      <div class="hero-card">
+        <div class="brand-row">
+          <div class="passport-mark" aria-hidden="true">✈</div>
+          <div>
+            <p class="eyebrow">5-Minute Speaking Practice</p>
+            <h1 id="appTitle">Pass Port! <span>Airport Talk</span></h1>
+          </div>
+        </div>
+
+        <div class="officer-hero" aria-hidden="true">
+          <div class="booth-sign">IMMIGRATION</div>
+          <div class="officer-avatar large">👮</div>
+          <div class="booth-line"></div>
+        </div>
+
+        <h2 class="hero-title">Clear Airport Immigration in 5 Minutes!</h2>
+        <p class="hero-copy">Practice five common immigration questions with Officer Sam. Listen, speak, get feedback, and try again.</p>
+
+        <div class="privacy-note">
+          <span aria-hidden="true">🔒</span>
+          <p>Your voice is processed to turn it into text and is not recorded or saved.</p>
+        </div>
+
+        <div class="browser-guidance hidden" id="browserGuidance" role="status"></div>
+
+        <div class="start-actions">
+          <button class="primary-btn" id="startBtn">Start Practice</button>
+          <button class="secondary-btn" id="settingsBtn">Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="settingsScreen" aria-labelledby="settingsTitle">
+      <div class="panel-card">
+        <div class="screen-heading-row">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h2 id="settingsTitle">Practice Settings</h2>
+          </div>
+          <button class="icon-btn" id="settingsBackBtn" aria-label="Back to start">←</button>
+        </div>
+
+        <div class="setting-item">
+          <div><strong>Korean translation</strong><p>Show Korean meaning during practice.</p></div>
+          <label class="switch"><input type="checkbox" id="translationSetting" checked /><span class="slider"></span></label>
+        </div>
+
+        <div class="setting-item">
+          <div><strong>Auto-play officer question</strong><p>Play the officer's question once when each turn starts.</p></div>
+          <label class="switch"><input type="checkbox" id="autoplaySetting" checked /><span class="slider"></span></label>
+        </div>
+
+        <div class="setting-item">
+          <div><strong>Practice reminder</strong><p>No strict timer. Take the time you need to speak.</p></div>
+          <span class="status-pill">No time limit</span>
+        </div>
+
+        <button class="primary-btn full-width" id="saveSettingsBtn">Save & Return</button>
+      </div>
+    </section>
+
+    <section class="screen" id="practiceScreen" aria-labelledby="targetSentence">
+      <div class="practice-shell">
+        <header class="practice-top">
+          <div class="progress-meta"><span id="questionCount">Question 1 of 5</span><span id="attemptCount">Attempt 1</span></div>
+          <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+        </header>
+
+        <section class="officer-card" aria-label="Officer Sam">
+          <div class="officer-avatar">👮</div>
+          <div class="officer-copy">
+            <p class="officer-name">Officer Sam</p>
+            <div class="speech-bubble">
+              <p id="officerQuestion">May I see your passport, please?</p>
+              <button class="translation-toggle" id="questionTranslationToggle" type="button">한국어 보기</button>
+              <p class="translation-text hidden" id="questionTranslation"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="target-card">
+          <p class="section-label">Your target answer</p>
+          <h2 id="targetSentence">Here is my passport and declaration form.</h2>
+          <p class="target-translation" id="targetTranslation"></p>
+          <div class="listen-actions">
+            <button class="secondary-btn" id="listenBtn">🔊 Listen</button>
+            <button class="secondary-btn" id="slowBtn">🐢 Slow</button>
+          </div>
+        </section>
+
+        <section class="speak-card">
+          <p class="section-label">Your turn</p>
+          <button class="mic-btn" id="micBtn" type="button" aria-live="polite">
+            <span class="mic-icon">🎙️</span>
+            <span class="mic-state" id="micState">Ready</span>
+          </button>
+          <p class="mic-help" id="micHelp">Tap the mic and say the target answer.</p>
+
+          <div class="transcript-card">
+            <p class="transcript-label">What I heard</p>
+            <p id="transcriptText">Your speech will appear here.</p>
+          </div>
+
+          <div class="feedback-card hidden" id="feedbackCard" aria-live="polite">
+            <p class="feedback-kicker">Officer Sam's feedback</p>
+            <p class="feedback-message" id="feedbackMessage"></p>
+          </div>
+
+          <div class="practice-controls">
+            <button class="secondary-btn" id="tryAgainBtn" disabled>Try Again</button>
+            <button class="primary-btn" id="nextBtn" disabled>Next ➔</button>
+            <button class="text-btn" id="skipBtn">Skip</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="screen" id="resultScreen" aria-labelledby="resultTitle">
+      <div class="result-card">
+        <div class="stamp" aria-hidden="true"><span>IMMIGRATION</span><strong>CLEARED</strong></div>
+        <p class="eyebrow">Practice Complete</p>
+        <h2 id="resultTitle">Immigration Cleared! Great Job!</h2>
+        <p class="result-subtitle">You finished the full airport dialogue.</p>
+
+        <div class="stars" id="starDisplay" aria-label="Completion stars">⭐⭐⭐</div>
+        <p class="star-note" id="starNote">Stars reward completion and participation, not accent accuracy.</p>
+
+        <div class="summary-box">
+          <div class="summary-stat"><span>Turns finished</span><strong id="turnsFinished">5 / 5</strong></div>
+          <div class="summary-stat"><span>Spoken turns</span><strong id="spokenTurns">0 / 5</strong></div>
+        </div>
+
+        <section class="review-section" aria-labelledby="reviewTitle">
+          <h3 id="reviewTitle">Your Immigration Answers</h3>
+          <div id="reviewList" class="review-list"></div>
+        </section>
+
+        <div class="result-actions">
+          <button class="primary-btn" id="practiceAgainBtn">Practice Again</button>
+          <button class="secondary-btn" id="homeBtn">Exit to Home</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal hidden" id="supportModal" role="dialog" aria-modal="true" aria-labelledby="supportTitle">
+      <div class="modal-card">
+        <button class="modal-close" id="closeSupportBtn" aria-label="Close">×</button>
+        <h2 id="supportTitle">Microphone Help</h2>
+        <p id="supportMessage"></p>
+        <button class="primary-btn full-width" id="supportOkBtn">OK</button>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
